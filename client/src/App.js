@@ -12,7 +12,7 @@ import {
   Link
 } from "react-router-dom";
 
-import BrowseDisplay from './components/Browse/BrowseDispaly';
+import BrowseDisplay from './components/Browse/BrowseDisplay';
 import PurchasesDisplay from './components/Purchases/PurchasesDisplay';
 
 const useStyles = makeStyles((theme) => ({

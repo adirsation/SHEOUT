@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   link: {
-    marginRight: '15px',
     color: 'white',
     textDecoration: 'none'
   },
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
   links: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
   },
 }));
 
@@ -52,10 +50,10 @@ function App() {
               <Typography edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                 <img src={logo} className={classes.logo} alt='logo' />
               </Typography>
-              <Button variant="h6" >
+              <Button>
                 <Link className={classes.link} to='/browse'>Browse</Link>
               </Button>
-              <Button variant="h6" className={classes.link}>
+              <Button>
               <Link className={classes.link} to='/purchases'>Purchases</Link>
               </Button>
             </div>

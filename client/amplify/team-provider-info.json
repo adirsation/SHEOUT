@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "sheout329f7b61": {}
+      },
+      "function": {
+        "order": {
+          "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
+          "s3Key": "amplify-builds/order-724d7659694365646e72-build.zip"
+        }
       }
     }
   }

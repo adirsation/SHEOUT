@@ -13,8 +13,6 @@ import CardContent from '@material-ui/core/CardContent';
 import master from '../../images/master.png';
 import donatello from '../../images/donatello.jpg';
 import raphael from '../../images/raphael.png';
-import shredder from '../../images/shredder.jpg';
-import michell from '../../images/michell.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {

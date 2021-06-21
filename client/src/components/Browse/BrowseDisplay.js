@@ -12,6 +12,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import Product from './Product';
 import productsActions from '../../redux/actions/productsActions';
+import purchaseActions from '../../redux/actions/purchaseActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,6 +71,17 @@ export default function BrowseDisplay(props) {
     }
   }
 
+  const handleSubmitOrder = () => {
+    let order = []
+    for(var key in basket) {
+      order.push({
+        product_id: key,
+        amount: basket[key]
+      })
+    }
+    dispatch(purchaseActions.submitOrder(order));
+  }
+
   useEffect(() => {
     dispatch(productsActions.fetchProducts());
   }, [dispatch]);
@@ -90,7 +102,7 @@ export default function BrowseDisplay(props) {
                 <img src={currProduct.img} alt={currProduct.name} />
                 <Product product={currProduct}
                   handleAddToBasket={handleAddToBasket}
-                  handleRemoveFromBasket={handleRemoveFromBasket}
+                  handleRemoveFromBasket={() => handleRemoveFromBasket(currProduct.id)}
                 />
               </GridListTile>
             ))}
@@ -98,7 +110,7 @@ export default function BrowseDisplay(props) {
           {_.isEmpty(basket)
             ? ''
             : <Tooltip color="secondary" title="Add" aria-label="add">
-              <Fab className={classes.absolute}>
+              <Fab className={classes.absolute} onClick={handleSubmitOrder}>
                 <ShoppingCartIcon />
               </Fab>
             </Tooltip>

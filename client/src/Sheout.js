@@ -1,6 +1,7 @@
-import logo from './logo.png';
 import React from 'react';
+import {AmplifySignOut } from '@aws-amplify/ui-react';
 import { makeStyles } from '@material-ui/core/styles';
+import logo from './logo.png';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function App() {
+const Sheout = (props) => {
   const classes = useStyles();
 
   return (
@@ -54,10 +55,10 @@ function App() {
                 <Link className={classes.link} to='/browse'>Browse</Link>
               </Button>
               <Button>
-              <Link className={classes.link} to='/purchases'>Purchases</Link>
+                <Link className={classes.link} to='/purchases'>Purchases</Link>
               </Button>
             </div>
-            <Button color="inherit" className={classes.login}>Login</Button>
+            <AmplifySignOut className={classes.login}/>
           </Toolbar>
         </AppBar>
         <Switch>
@@ -73,7 +74,7 @@ function App() {
         </Switch>
       </Router>
     </div>
-  );
-}
+  )
+};
 
-export default App;
+export default Sheout;

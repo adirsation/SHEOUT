@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
 import RemoveIcon from '@material-ui/icons/Remove';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import AddIcon from '@material-ui/icons/Add';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
@@ -25,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Product(props) {
     const classes = useStyles();
 
-    const [count, setCount] = React.useState(1);
+    const [count, setCount] = React.useState(0);
 
-    const { product } = props;
+    const { product, handleAddToBasket, handleRemoveFromBasket } = props;
     const displayCounter = count > 0;
 
     return (
@@ -41,6 +39,7 @@ export default function Product(props) {
                             aria-label="reduce"
                             onClick={() => {
                                 setCount(Math.max(count - 1, 0));
+                                handleRemoveFromBasket(product.id)
                             }}
                         >
                             <RemoveIcon fontSize="small" />
@@ -50,14 +49,12 @@ export default function Product(props) {
                             aria-label="increase"
                             onClick={() => {
                                 setCount(count + 1);
+                                handleAddToBasket(product.id)
                             }}
                         >
                             <AddIcon fontSize="small" />
                         </Button>
                     </ButtonGroup>
-                    <IconButton className={classes.icon}>
-                        <AddShoppingCartIcon />
-                    </IconButton>
                 </div>
             }
         />

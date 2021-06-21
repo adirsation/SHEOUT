@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import Product from './Product';
-
-import master from '../../images/master.png';
-import donatello from '../../images/donatello.jpg';
-import raphael from '../../images/raphael.png';
-import shredder from '../../images/shredder.jpg';
-import michell from '../../images/michell.png';
+import productsActions from '../../redux/actions/productsActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,57 +25,86 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     position: 'relative'
   },
+  loader: {
+    marginTop: '40vh',
+  },
+  absolute: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(3),
+  },
 }));
 
-const data = [
-  {
-    id: 1,
-    name: 'Master Splinter',
-    img: master,
-    price: 50
-  },
-  {
-    id: 2,
-    name: 'Donatello Turtle',
-    img: donatello,
-    price: 30
-  },
-  {
-    id: 3,
-    name: 'Raphael Tutrle',
-    img: raphael,
-    price: 30
-  },
-  {
-    id: 4,
-    name: 'Shredder',
-    img: shredder,
-    price: 10
-  },
-  {
-    id: 5,
-    name: 'Michelangelo',
-    img: michell,
-    price: 30
-  },
-]
+export default function BrowseDisplay(props) {
+  const dispatch = useDispatch();
 
-export default function BrowseDisplay() {
+  const [basket, setBasket] = useState({});
+  const products = useSelector(state => state.productsReducer.products);
+
+  const handleAddToBasket = (productId) => {
+    if (basket.hasOwnProperty(productId)) {
+      setBasket({
+        ...basket,
+        [productId]: basket[productId] + 1
+      })
+    } else {
+      setBasket({
+        ...basket,
+        [productId]: 1
+      })
+    }
+  }
+
+  const handleRemoveFromBasket = (productId) => {
+    if (basket.hasOwnProperty(productId)) {
+      if (basket[productId] === 1) {
+        let newBasket = Object.assign({}, basket);
+        delete newBasket[productId];
+        setBasket(newBasket);
+      } else {
+        setBasket({
+          ...basket,
+          [productId]: basket[productId] - 1
+        })
+      }
+    }
+  }
+
+  useEffect(() => {
+    dispatch(productsActions.fetchProducts());
+  }, [dispatch]);
+
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={350} className={classes.gridList} cols={3}>
-        <GridListTile key="Header" cols={3} style={{ height: 'auto', textAlign: 'center' }}>
-          <Typography variant="h2" color="initial">Browse Products</Typography>
-        </GridListTile>
-        {data.map((currProduct) => (
-          <GridListTile key={currProduct.id} cols={1}>
-            <img src={currProduct.img} alt={currProduct.name} />
-            <Product product={currProduct} />
-          </GridListTile>
-        ))}
-      </GridList>
+      {!!!products
+        ? <CircularProgress size={100} className={classes.loader} />
+        : <>
+          <GridList cellHeight={350} className={classes.gridList} cols={3}>
+            <GridListTile key="Header" cols={3} style={{ height: 'auto', textAlign: 'center' }}>
+              <Typography variant="h2" color="initial">Browse Products</Typography>
+            </GridListTile>
+            {products.map((currProduct) => (
+              <GridListTile key={currProduct.id} cols={1}>
+                <img src={currProduct.img} alt={currProduct.name} />
+                <Product product={currProduct}
+                  handleAddToBasket={handleAddToBasket}
+                  handleRemoveFromBasket={handleRemoveFromBasket}
+                />
+              </GridListTile>
+            ))}
+          </GridList>
+          {_.isEmpty(basket)
+            ? ''
+            : <Tooltip color="secondary" title="Add" aria-label="add">
+              <Fab className={classes.absolute}>
+                <ShoppingCartIcon />
+              </Fab>
+            </Tooltip>
+          }
+        </>
+      }
     </div>
   );
 }

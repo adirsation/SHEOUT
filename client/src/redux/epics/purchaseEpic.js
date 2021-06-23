@@ -8,5 +8,5 @@ export const submitOrderEpic = action$ =>
     action$.pipe(
         ofType(Actions.SUBMIT_ORDER),
         switchMap(action => from(action.payload).pipe(
-            products => from(API.post('order', '/', { body: products })).pipe(
+            products => from(API.post('orderApi', '/order', { body: products })).pipe(
                 mergeMap(() => of(Actions.submitOrderSuccessfull()))))));

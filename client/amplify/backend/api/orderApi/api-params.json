@@ -1,0 +1,36 @@
+{
+    "paths": [
+        {
+            "name": "/order",
+            "lambdaFunction": "order",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/order"
+        }
+    ],
+    "resourceName": "orderApi",
+    "apiName": "orderApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "order"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-sheout-dev-151156-authRole",
+        "unAuthRoleName": "amplify-sheout-dev-151156-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "order",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ],
+    "uuid": "015ea2fc"
+}

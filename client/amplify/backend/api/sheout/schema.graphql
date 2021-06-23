@@ -1,19 +1,18 @@
 type Purchase @model
-              @auth(rules: [{allow: owner}]) {
-  id: ID!
-  products: [PurchasedProduct] @connection(keyName: "byPurchase", fields: ["id"])
+              @auth(rules: [{ allow: owner },
+                            { allow: private, provider: iam, operations: [create, read] }]) {
+  id: ID,
+  products: [PurchasedProduct] @connection(keyName: "PurchasedProductByPurchase", fields: ["id"])
 }
 
 type PurchasedProduct @model(queries: null)
-                      @auth(rules: [{allow: owner}])
-                      @key(name: "byProduct", fields: ["product_id", "purchase_id"])
-                      @key(name: "byPurchase", fields: ["purchase_id", "product_id"]) {
+                      @auth(rules: [ { allow: owner },
+                                     { allow: private, provider: iam, operations: [create, read] }])
+                      @key(name: "PurchasedProductByPurchase", fields: ["purchase_id"]) {
   id: ID!
   amount: Int!
-  purchase_id: ID!
-  product_id: ID! 
-  product: Product! @connection(fields: ["product_id"]) 
-  purchase: Purchase! @connection(fields: ["purchase_id"]) 
+  purchase_id: ID! 
+  product: Product! @connection(fields: ["id"])
 }
 
 type Product @model {
@@ -21,5 +20,4 @@ type Product @model {
   name: String!
   img: String!
   price: Int!
-  purchases: [PurchasedProduct] @connection(keyName:"byProduct", fields:["id"])
 }

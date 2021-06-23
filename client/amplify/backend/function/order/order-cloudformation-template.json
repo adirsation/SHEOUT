@@ -23,6 +23,18 @@
     "apisheoutGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apisheoutGraphQLAPIEndpointOutput"
+    },
+    "apiorderApiApiName": {
+      "Type": "String",
+      "Default": "apiorderApiApiName"
+    },
+    "apiorderApiApiId": {
+      "Type": "String",
+      "Default": "apiorderApiApiId"
+    },
+    "authsheout329f7b61UserPoolId": {
+      "Type": "String",
+      "Default": "authsheout329f7b61UserPoolId"
     }
   },
   "Conditions": {
@@ -83,6 +95,15 @@
             },
             "API_SHEOUT_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apisheoutGraphQLAPIEndpointOutput"
+            },
+            "API_ORDERAPI_APINAME": {
+              "Ref": "apiorderApiApiName"
+            },
+            "API_ORDERAPI_APIID": {
+              "Ref": "apiorderApiApiId"
+            },
+            "AUTH_SHEOUT329F7B61_USERPOOLID": {
+              "Ref": "authsheout329f7b61UserPoolId"
             }
           }
         },

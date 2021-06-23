@@ -5,7 +5,7 @@ import { createEpicMiddleware } from 'redux-observable';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './redux/reducers/index';
 import epics from './redux/epics/index';
-import Amplify from 'aws-amplify';
+import Amplify, { API } from 'aws-amplify';
 import awsconfig from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 
@@ -24,6 +24,7 @@ const store = createStore(
 epicMiddleware.run(epics);
 
 Amplify.configure(awsconfig);
+API.configure(awsconfig);
 
 const App = () => (
   <Provider store={store}>

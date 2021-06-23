@@ -1,48 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getPurchase = /* GraphQL */ `
-  query GetPurchase($id: ID!) {
-    getPurchase(id: $id) {
-      id
-      products {
-        items {
-          id
-          amount
-          purchase_id
-          product_id
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listPurchases = /* GraphQL */ `
-  query ListPurchases(
-    $filter: ModelPurchaseFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPurchases(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        products {
-          nextToken
-        }
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-    }
-  }
-`;
 export const getProduct = /* GraphQL */ `
   query GetProduct($id: ID!) {
     getProduct(id: $id) {
@@ -50,18 +8,6 @@ export const getProduct = /* GraphQL */ `
       name
       img
       price
-      purchases {
-        items {
-          id
-          amount
-          purchase_id
-          product_id
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-      }
       createdAt
       updatedAt
     }
@@ -79,11 +25,49 @@ export const listProducts = /* GraphQL */ `
         name
         img
         price
-        purchases {
-          nextToken
-        }
         createdAt
         updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPurchase = /* GraphQL */ `
+  query GetPurchase($id: ID!) {
+    getPurchase(id: $id) {
+      id
+      createdAt
+      updatedAt
+      owner
+      products {
+        items {
+          id
+          amount
+          purchase_id
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listPurchases = /* GraphQL */ `
+  query ListPurchases(
+    $filter: ModelPurchaseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPurchases(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        createdAt
+        updatedAt
+        owner
+        products {
+          nextToken
+        }
       }
       nextToken
     }

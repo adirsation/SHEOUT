@@ -1,14 +1,19 @@
-const gql = require('graphql-tag');
-
-export const orderMutation = `
-mutation createPurchase($input: CreatePurchaseInput!) {
-    createPurchase(input: $input) {
-    products {
-      items {
-        amount
-        product_id
-      }
+export const createPurchasedProductMutation = `
+mutation createPurchasedProduct($input: CreatePurchasedProductInput!) {
+  createPurchasedProduct(input: $input) {
+    amount
+    purchase_id
+    product {
+      id
     }
+  }
+}
+`
+
+export const createPurchaseMutation = `
+mutation createPurchase($input: CreatePurchaseInput!) {
+  createPurchase(input: $input) {
+    id
   }
 }
 `

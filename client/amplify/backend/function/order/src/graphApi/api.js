@@ -1,19 +1,20 @@
-export const createPurchasedProductMutation = `
+const createPurchasedProductMutation = `
 mutation createPurchasedProduct($input: CreatePurchasedProductInput!) {
   createPurchasedProduct(input: $input) {
-    amount
-    purchase_id
-    product {
-      id
-    }
+    id
   }
 }
 `
 
-export const createPurchaseMutation = `
+const createPurchaseMutation = `
 mutation createPurchase($input: CreatePurchaseInput!) {
   createPurchase(input: $input) {
     id
   }
 }
 `
+
+module.exports = {
+  createPurchaseMutation,
+  createPurchasedProductMutation
+}

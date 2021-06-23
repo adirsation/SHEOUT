@@ -4,7 +4,14 @@
             "name": "/order",
             "lambdaFunction": "order",
             "privacy": {
-                "open": true
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
             },
             "policyResourceName": "/order"
         }
@@ -17,7 +24,7 @@
         }
     ],
     "privacy": {
-        "auth": 0,
+        "auth": 1,
         "unauth": 0,
         "authRoleName": "amplify-sheout-dev-151156-authRole",
         "unAuthRoleName": "amplify-sheout-dev-151156-unauthRole"
@@ -32,5 +39,5 @@
             ]
         }
     ],
-    "uuid": "015ea2fc"
+    "uuid": "df145869"
 }

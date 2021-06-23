@@ -49,6 +49,7 @@ export const onCreatePurchase = /* GraphQL */ `
           id
           amount
           purchase_id
+          product_id
           createdAt
           updatedAt
           owner
@@ -70,6 +71,7 @@ export const onUpdatePurchase = /* GraphQL */ `
           id
           amount
           purchase_id
+          product_id
           createdAt
           updatedAt
           owner
@@ -91,6 +93,7 @@ export const onDeletePurchase = /* GraphQL */ `
           id
           amount
           purchase_id
+          product_id
           createdAt
           updatedAt
           owner
@@ -106,6 +109,7 @@ export const onCreatePurchasedProduct = /* GraphQL */ `
       id
       amount
       purchase_id
+      product_id
       product {
         id
         name
@@ -126,6 +130,7 @@ export const onUpdatePurchasedProduct = /* GraphQL */ `
       id
       amount
       purchase_id
+      product_id
       product {
         id
         name
@@ -146,6 +151,7 @@ export const onDeletePurchasedProduct = /* GraphQL */ `
       id
       amount
       purchase_id
+      product_id
       product {
         id
         name

@@ -44,6 +44,7 @@ export const getPurchase = /* GraphQL */ `
           id
           amount
           purchase_id
+          product_id
           createdAt
           updatedAt
           owner

@@ -30,14 +30,15 @@ app.use(function (req, res, next) {
 });
 
 app.post('/order', async function (req, res) {
-  const gqlReq = new AWS.HttpRequest(appsyncUrl, region);
+  let gqlReq = new AWS.HttpRequest(appsyncUrl, region);
 
   gqlReq.headers.host = endpoint;
-  gqlReq.headers["Access-Control-Allow-Origin"] = "*";
-  gqlReq.headers["Content-Type"] = "application/json";
+  gqlReq.headers["Content-Type"] = "multipart/form-data";
   gqlReq.body = JSON.stringify({
     query: createPurchaseMutation,
-    operationName: "orderApi",
+    variables: {
+      input: {}
+    }
   });
 
   const signer = new AWS.Signers.V4(gqlReq, "appsync", true);
@@ -49,33 +50,42 @@ app.post('/order', async function (req, res) {
       url: appsyncUrl,
       data: gqlReq.body,
       headers: gqlReq.headers,
-      variables: {}
     });
+    const purchase_id = purchaseResp.data.data.createPurchase.id;
+    const { products } = req.body;
 
-    const purchase_id = purchaseResp.data.createPurchase.id;
+    products.map(async (currProduct, index) => {
+      let request = new AWS.HttpRequest(appsyncUrl, region);
 
-    req.body.products.map(currProduct => {
-      gqlReq.body = JSON.stringify({
-        query: orderMutation,
-        operationName: "orderApi",
+      request.headers.host = endpoint;
+      request.headers["Content-Type"] = "multipart/form-data";
+      request.body = JSON.stringify({
+        query: createPurchaseMutation,
         variables: {
-          purchasedProductProductId: currProduct.product_id,
-          amount: currProduct.amount,
-          purchase_id
+          input: {
+            product_id: currProduct.product_id,
+            amount: currProduct.amount,
+            purchase_id: purchase_id
+          }
         }
+      });
+
+      const signer = new AWS.Signers.V4(gqlReq, "appsync", true);
+      signer.addAuthorization(AWS.config.credentials, AWS.util.date.getDate());
+
+      const response = await axios({
+        method: "POST",
+        url: appsyncUrl,
+        data: request.body,
+        headers: request.headers,
       });
     });
 
-    if (response.ok()) {
-      console.log('Lambda executed successfully', response.status);
-      res.status(200).send('Order submitted successfully');
-    } else {
-      console.log('Request to GraphQL Failed, error: ', response.error);
-      res.status(500).send('An error occured while tried to make an order');
-    }
+    console.log('Order lambda executed successfully.');
+    res.send('Ordered successfully');
   } catch (err) {
-    console.log('An error occured while tried made an order: ', err);
-    res.status(500).send('An error occured while tried to make an order');
+    console.log('An error occured while trying to create an order: ', err);
+    res.status(500).send('An error occured while trying to create an order');
 
   }
 });

@@ -1,7 +1,7 @@
 type Purchase @model
               @auth(rules: [{ allow: owner },
                             { allow: private, provider: iam, operations: [create, read] }]) {
-  id: ID,
+  id: ID!,
   products: [PurchasedProduct] @connection(keyName: "PurchasedProductByPurchase", fields: ["id"])
 }
 
@@ -12,7 +12,8 @@ type PurchasedProduct @model(queries: null)
   id: ID!
   amount: Int!
   purchase_id: ID! 
-  product: Product! @connection(fields: ["id"])
+  product_id: ID!
+  product: Product! @connection(fields: ["product_id"])
 }
 
 type Product @model {

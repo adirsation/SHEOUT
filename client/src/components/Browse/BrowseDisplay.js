@@ -79,7 +79,7 @@ export default function BrowseDisplay(props) {
         amount: basket[key]
       })
     }
-    dispatch(purchaseActions.submitOrder(order));
+    dispatch(purchaseActions.submitOrder({ products: order}));
   }
 
   useEffect(() => {

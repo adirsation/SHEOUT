@@ -1088,6 +1088,21 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "product_id",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "SCALAR",
+              "name" : "ID",
+              "ofType" : null
+            }
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "product",
           "description" : null,
           "args" : [ ],
@@ -1173,6 +1188,15 @@
           "defaultValue" : null
         }, {
           "name" : "purchase_id",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "product_id",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -1757,7 +1781,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "purchasedProductProductId",
+          "name" : "product_id",
           "description" : null,
           "type" : {
             "kind" : "SCALAR",
@@ -1785,6 +1809,15 @@
           "defaultValue" : null
         }, {
           "name" : "purchase_id",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelIDInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "product_id",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",
@@ -2111,7 +2144,7 @@
           },
           "defaultValue" : null
         }, {
-          "name" : "purchasedProductProductId",
+          "name" : "product_id",
           "description" : null,
           "type" : {
             "kind" : "NON_NULL",

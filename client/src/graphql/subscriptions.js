@@ -41,18 +41,18 @@ export const onCreatePurchase = /* GraphQL */ `
   subscription OnCreatePurchase($owner: String) {
     onCreatePurchase(owner: $owner) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -63,18 +63,18 @@ export const onUpdatePurchase = /* GraphQL */ `
   subscription OnUpdatePurchase($owner: String) {
     onUpdatePurchase(owner: $owner) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -85,18 +85,18 @@ export const onDeletePurchase = /* GraphQL */ `
   subscription OnDeletePurchase($owner: String) {
     onDeletePurchase(owner: $owner) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -107,6 +107,7 @@ export const onCreatePurchasedProduct = /* GraphQL */ `
   subscription OnCreatePurchasedProduct($owner: String) {
     onCreatePurchasedProduct(owner: $owner) {
       id
+      owner
       amount
       purchase_id
       product_id
@@ -120,7 +121,6 @@ export const onCreatePurchasedProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -128,6 +128,7 @@ export const onUpdatePurchasedProduct = /* GraphQL */ `
   subscription OnUpdatePurchasedProduct($owner: String) {
     onUpdatePurchasedProduct(owner: $owner) {
       id
+      owner
       amount
       purchase_id
       product_id
@@ -141,7 +142,6 @@ export const onUpdatePurchasedProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -149,6 +149,7 @@ export const onDeletePurchasedProduct = /* GraphQL */ `
   subscription OnDeletePurchasedProduct($owner: String) {
     onDeletePurchasedProduct(owner: $owner) {
       id
+      owner
       amount
       purchase_id
       product_id
@@ -162,7 +163,6 @@ export const onDeletePurchasedProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

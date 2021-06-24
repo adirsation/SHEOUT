@@ -36,18 +36,18 @@ export const getPurchase = /* GraphQL */ `
   query GetPurchase($id: ID!) {
     getPurchase(id: $id) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -63,9 +63,9 @@ export const listPurchases = /* GraphQL */ `
     listPurchases(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        owner
         createdAt
         updatedAt
-        owner
         products {
           nextToken
         }

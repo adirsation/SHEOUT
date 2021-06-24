@@ -8,18 +8,18 @@ export const updatePurchase = /* GraphQL */ `
   ) {
     updatePurchase(input: $input, condition: $condition) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -33,18 +33,18 @@ export const deletePurchase = /* GraphQL */ `
   ) {
     deletePurchase(input: $input, condition: $condition) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -58,6 +58,7 @@ export const updatePurchasedProduct = /* GraphQL */ `
   ) {
     updatePurchasedProduct(input: $input, condition: $condition) {
       id
+      owner
       amount
       purchase_id
       product_id
@@ -71,7 +72,6 @@ export const updatePurchasedProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -82,6 +82,7 @@ export const deletePurchasedProduct = /* GraphQL */ `
   ) {
     deletePurchasedProduct(input: $input, condition: $condition) {
       id
+      owner
       amount
       purchase_id
       product_id
@@ -95,7 +96,6 @@ export const deletePurchasedProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -151,18 +151,18 @@ export const createPurchase = /* GraphQL */ `
   ) {
     createPurchase(input: $input, condition: $condition) {
       id
+      owner
       createdAt
       updatedAt
-      owner
       products {
         items {
           id
+          owner
           amount
           purchase_id
           product_id
           createdAt
           updatedAt
-          owner
         }
         nextToken
       }
@@ -176,6 +176,7 @@ export const createPurchasedProduct = /* GraphQL */ `
   ) {
     createPurchasedProduct(input: $input, condition: $condition) {
       id
+      owner
       amount
       purchase_id
       product_id
@@ -189,7 +190,6 @@ export const createPurchasedProduct = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

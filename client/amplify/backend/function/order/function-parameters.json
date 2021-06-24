@@ -7,6 +7,14 @@
         "Mutation",
         "Subscription"
       ]
+    },
+    "auth": {
+      "sheout9b7ca99c9b7ca99c": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
     }
   }
 }

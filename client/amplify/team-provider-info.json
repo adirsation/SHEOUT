@@ -12,14 +12,14 @@
       "AmplifyAppId": "dw8m5frli58a5"
     },
     "categories": {
-      "auth": {
-        "sheout329f7b61": {}
-      },
       "function": {
         "order": {
           "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
-          "s3Key": "amplify-builds/order-45656a564a5651485454-build.zip"
+          "s3Key": "amplify-builds/order-327779716a514450424a-build.zip"
         }
+      },
+      "auth": {
+        "sheout9b7ca99c9b7ca99c": {}
       }
     }
   }

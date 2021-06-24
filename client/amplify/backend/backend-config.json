@@ -8,7 +8,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authsheout329f7b61"
+              "userPoolId": "authsheout9b7ca99c9b7ca99c"
             }
           },
           "additionalAuthenticationProviders": [
@@ -34,14 +34,6 @@
       ]
     }
   },
-  "auth": {
-    "sheout329f7b61": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
-    }
-  },
   "storage": {},
   "function": {
     "order": {
@@ -56,8 +48,23 @@
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
           ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "sheout9b7ca99c9b7ca99c",
+          "attributes": [
+            "UserPoolId"
+          ]
         }
       ]
+    }
+  },
+  "auth": {
+    "sheout9b7ca99c9b7ca99c": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
     }
   }
 }

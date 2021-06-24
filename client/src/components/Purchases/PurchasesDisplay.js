@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,21 +12,22 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import master from '../../images/master.png';
-import donatello from '../../images/donatello.jpg';
-import raphael from '../../images/raphael.png';
+import purchaseActions from '../../redux/actions/purchaseActions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    flexDirection: 'row'
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
   },
   inline: {
     display: 'inline',
     fontSize: '1.5em'
+  },
+  loader: {
+    marginTop: '40vh',
   },
   purchasesContainer: {
     display: 'flex',
@@ -35,54 +38,23 @@ const useStyles = makeStyles((theme) => ({
     height: theme.spacing(12),
   }
 }));
-export const purchases = [
-  {
-    id: 1,
-    products: [
-      {
-        id: 1,
-        name: 'Master Splinter',
-        img: master,
-        price: 50
-      },
-      {
-        id: 2,
-        name: 'Donatello Turtle',
-        img: donatello,
-        price: 30
-      }]
-  },
-  {
-    id: 2,
-    products: [{
-      id: 1,
-      name: 'Master Splinter',
-      img: master,
-      price: 50
-    },
-    {
-      id: 2,
-      name: 'Donatello Turtle',
-      img: donatello,
-      price: 30
-    },
-    {
-      id: 3,
-      name: 'Raphael Tutrle',
-      img: raphael,
-      price: 30
-    }
-    ]
-  }
-]
 
 export default function PurchasesDisplay() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const purchases = useSelector(state => state.purchaseReducer.purchases);
+
+  useEffect(() => {
+    dispatch(purchaseActions.fetchPurchases());
+  }, [dispatch]);
 
   return (
-    <div className={classes.purchasesContainer}>
-      {
-        purchases.map((currPurchase) => (
+    !!!purchases
+      ? <div className={classes.root}>
+        <CircularProgress size={100} className={classes.loader} />
+      </div>
+      : <div className={classes.purchasesContainer}>
+        {purchases.map((currPurchase) => (
           <Card key={currPurchase.id.toString()} style={{ marginBottom: '15px' }}>
             <CardContent>
               <Typography
@@ -119,7 +91,7 @@ export default function PurchasesDisplay() {
             </CardContent>
           </Card>
         ))
-      }
-    </div>
+        }
+      </div>
   );
 }

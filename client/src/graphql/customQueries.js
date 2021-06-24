@@ -13,6 +13,7 @@ export const listPurchases = /* GraphQL */ `
         }
       }
       createdAt
+      id
     }
   }
 }

@@ -64,22 +64,22 @@ export default function PurchasesDisplay() {
                 Purchase #{currPurchase.id}:
               </Typography>
               <List className={classes.root}>
-                {currPurchase.products.map((currProduct, prodIndex) => (
+                {currPurchase.products.items.map((currProduct, prodIndex) => (
                   <div key={currPurchase.id.toString() + "-" + prodIndex}>
                     <ListItem alignItems="flex-start">
                       <ListItemAvatar>
-                        <Avatar className={classes.large} alt={currProduct.name} src={currProduct.img} />
+                        <Avatar className={classes.large} alt={currProduct.product.name} src={currProduct.product.img} />
                       </ListItemAvatar>
                       <ListItemText
                         primary={<Typography
                           variant="h4"
                           color="textPrimary"
                         >
-                          {currProduct.name}
+                          {currProduct.product.name}
                         </Typography>}
                         secondary={
                           <span className={classes.inline}>
-                            Price: {currProduct.price}$
+                            Price: {currProduct.product.price}$ - Amount: {currProduct.amount}
                           </span>
                         }
                       />

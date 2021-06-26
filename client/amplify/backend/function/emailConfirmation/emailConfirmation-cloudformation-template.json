@@ -16,18 +16,6 @@
     "s3Key": {
       "Type": "String"
     },
-    "apiorderApiApiName": {
-      "Type": "String",
-      "Default": "apiorderApiApiName"
-    },
-    "apiorderApiApiId": {
-      "Type": "String",
-      "Default": "apiorderApiApiId"
-    },
-    "authsheout9b7ca99c9b7ca99cUserPoolId": {
-      "Type": "String",
-      "Default": "authsheout9b7ca99c9b7ca99cUserPoolId"
-    },
     "apisheoutGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apisheoutGraphQLAPIIdOutput"
@@ -35,6 +23,18 @@
     "apisheoutGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apisheoutGraphQLAPIEndpointOutput"
+    },
+    "authsheout9b7ca99c9b7ca99cUserPoolId": {
+      "Type": "String",
+      "Default": "authsheout9b7ca99c9b7ca99cUserPoolId"
+    },
+    "analyticssheoutId": {
+      "Type": "String",
+      "Default": "analyticssheoutId"
+    },
+    "analyticssheoutRegion": {
+      "Type": "String",
+      "Default": "analyticssheoutRegion"
     },
     "functionsheoutcommonArn": {
       "Type": "String",
@@ -71,12 +71,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "order",
+            "emailConfirmation",
             {
               "Fn::Join": [
                 "",
                 [
-                  "order",
+                  "emailConfirmation",
                   "-",
                   {
                     "Ref": "env"
@@ -94,20 +94,14 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_ORDERAPI_APINAME": {
-              "Ref": "apiorderApiApiName"
-            },
-            "API_ORDERAPI_APIID": {
-              "Ref": "apiorderApiApiId"
-            },
             "AUTH_SHEOUT9B7CA99C9B7CA99C_USERPOOLID": {
               "Ref": "authsheout9b7ca99c9b7ca99cUserPoolId"
             },
-            "API_SHEOUT_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apisheoutGraphQLAPIIdOutput"
+            "ANALYTICS_SHEOUT_ID": {
+              "Ref": "analyticssheoutId"
             },
-            "API_SHEOUT_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apisheoutGraphQLAPIEndpointOutput"
+            "ANALYTICS_SHEOUT_REGION": {
+              "Ref": "analyticssheoutRegion"
             }
           }
         },
@@ -132,12 +126,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "sheoutLambdaRole88339505",
+            "sheoutLambdaRole3a982ce7",
             {
               "Fn::Join": [
                 "",
                 [
-                  "sheoutLambdaRole88339505",
+                  "sheoutLambdaRole3a982ce7",
                   "-",
                   {
                     "Ref": "env"
@@ -200,6 +194,22 @@
                     "lambda": {
                       "Ref": "LambdaFunction"
                     }
+                  },
+                  {
+                    "Fn::Sub": [
+                      "arn:aws:cognito-idp:${region}:${account}:*",
+                      {
+                        "region": {
+                          "Ref": "AWS::Region"
+                        },
+                        "account": {
+                          "Ref": "AWS::AccountId"
+                        },
+                        "lambda": {
+                          "Ref": "LambdaFunction"
+                        }
+                      }
+                    ]
                   }
                 ]
               }
@@ -223,74 +233,6 @@
         "PolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "appsync:GraphQL"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apisheoutGraphQLAPIIdOutput"
-                      },
-                      "/types/Query/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apisheoutGraphQLAPIIdOutput"
-                      },
-                      "/types/Mutation/*"
-                    ]
-                  ]
-                },
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apisheoutGraphQLAPIIdOutput"
-                      },
-                      "/types/Subscription/*"
-                    ]
-                  ]
-                }
-              ]
-            },
             {
               "Effect": "Allow",
               "Action": [
@@ -397,9 +339,118 @@
                   ]
                 }
               ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "mobiletargeting:Put*",
+                "mobiletargeting:Create*",
+                "mobiletargeting:Send*",
+                "mobiletargeting:Get*",
+                "mobiletargeting:List*",
+                "mobiletargeting:Update*",
+                "mobiletargeting:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:mobiletargeting:",
+                      {
+                        "Ref": "analyticssheoutRegion"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apps/",
+                      {
+                        "Ref": "analyticssheoutId"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:mobiletargeting:",
+                      {
+                        "Ref": "analyticssheoutRegion"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":apps/",
+                      {
+                        "Ref": "analyticssheoutId"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }
+      }
+    },
+    "LambdaTriggerPolicyPurchase": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy-Purchase",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:DescribeStream",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:ListStreams"
+              ],
+              "Resource": {
+                "Fn::ImportValue": {
+                  "Fn::Sub": "${apisheoutGraphQLAPIIdOutput}:GetAtt:PurchaseTable:StreamArn"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "LambdaEventSourceMappingPurchase": {
+      "Type": "AWS::Lambda::EventSourceMapping",
+      "DependsOn": [
+        "LambdaTriggerPolicyPurchase",
+        "LambdaExecutionRole"
+      ],
+      "Properties": {
+        "BatchSize": 100,
+        "Enabled": true,
+        "EventSourceArn": {
+          "Fn::ImportValue": {
+            "Fn::Sub": "${apisheoutGraphQLAPIIdOutput}:GetAtt:PurchaseTable:StreamArn"
+          }
+        },
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "LambdaFunction",
+            "Arn"
+          ]
+        },
+        "StartingPosition": "LATEST"
       }
     }
   },

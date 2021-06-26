@@ -16,6 +16,14 @@
         "order": {
           "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
           "s3Key": "amplify-builds/order-327779716a514450424a-build.zip"
+        },
+        "emailConfirmation": {
+          "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
+          "s3Key": "amplify-builds/emailConfirmation-41363967682b68733656-build.zip"
+        },
+        "sheoutcommon": {
+          "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
+          "s3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion01c3decd-build.zip"
         }
       },
       "auth": {

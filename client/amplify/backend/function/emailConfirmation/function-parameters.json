@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "auth": {
+      "sheout9b7ca99c9b7ca99c": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "analytics": {
+      "sheout": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "sheoutcommon",
+      "env": "dev",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ]
+}

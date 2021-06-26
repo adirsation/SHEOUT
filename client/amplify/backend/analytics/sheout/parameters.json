@@ -1,0 +1,21 @@
+{
+    "appName": "sheout",
+    "roleName": "pinpointLambdaRole6421522f",
+    "cloudformationPolicyName": "cloudformationPolicy6421522f",
+    "cloudWatchPolicyName": "cloudWatchPolicy6421522f",
+    "pinpointPolicyName": "pinpointPolicy6421522f",
+    "authPolicyName": "pinpoint_amplify_6421522f",
+    "unauthPolicyName": "pinpoint_amplify_6421522f",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

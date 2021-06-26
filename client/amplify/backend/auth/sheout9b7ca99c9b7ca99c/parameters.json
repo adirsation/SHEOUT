@@ -1,6 +1,4 @@
 {
-    "identityPoolName": "sheout9b7ca99c9b7ca99c_identitypool_b142fcaf",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "sheout9b7ca99c",
     "userPoolName": "sheout9b7ca99c_userpool_9b7ca99c",
     "autoVerifiedAttributes": [
@@ -32,7 +30,7 @@
     "userpoolClientSetAttributes": false,
     "sharedId": "9b7ca99c",
     "resourceName": "sheout9b7ca99c9b7ca99c",
-    "authSelections": "identityPoolAndUserPool",
+    "authSelections": "userPoolOnly",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",

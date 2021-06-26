@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -11,6 +11,7 @@ import Fab from '@material-ui/core/Fab';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import Product from './Product';
+import OrderSnackbar from './OrderSnackbar';
 import productsActions from '../../redux/actions/productsActions';
 import purchaseActions from '../../redux/actions/purchaseActions';
 
@@ -41,6 +42,7 @@ export default function BrowseDisplay(props) {
 
   const [basket, setBasket] = useState({});
   const products = useSelector(state => state.productsReducer.products);
+  const showSnackbar = useSelector(state => state.purchaseReducer.showSnackbar);
 
   const handleAddToBasket = (productId) => {
     if (basket.hasOwnProperty(productId)) {
@@ -73,13 +75,13 @@ export default function BrowseDisplay(props) {
 
   const handleSubmitOrder = () => {
     let order = []
-    for(var key in basket) {
+    for (var key in basket) {
       order.push({
         product_id: key,
         amount: basket[key]
       })
     }
-    dispatch(purchaseActions.submitOrder({ products: order}));
+    dispatch(purchaseActions.submitOrder({ products: order }));
   }
 
   useEffect(() => {
@@ -116,6 +118,10 @@ export default function BrowseDisplay(props) {
             </Tooltip>
           }
         </>
+      }
+      {showSnackbar && showSnackbar.isOpen
+        ? <OrderSnackbar showSnackbar={showSnackbar} />
+        : ''
       }
     </div>
   );

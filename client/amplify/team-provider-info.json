@@ -19,11 +19,11 @@
         },
         "emailConfirmation": {
           "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
-          "s3Key": "amplify-builds/emailConfirmation-41363967682b68733656-build.zip"
+          "s3Key": "amplify-builds/emailConfirmation-326435707964566e4d55-build.zip"
         },
         "sheoutcommon": {
           "deploymentBucketName": "amplify-sheout-dev-151156-deployment",
-          "s3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion01c3decd-build.zip"
+          "s3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion91874375-build.zip"
         }
       },
       "auth": {

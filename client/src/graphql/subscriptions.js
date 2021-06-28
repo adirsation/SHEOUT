@@ -1,6 +1,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const subscribeToPurchase = /* GraphQL */ `
+  subscription SubscribeToPurchase($product_id: String!) {
+    subscribeToPurchase(product_id: $product_id) {
+      id
+    }
+  }
+`;
 export const onCreateProduct = /* GraphQL */ `
   subscription OnCreateProduct {
     onCreateProduct {
@@ -41,21 +48,6 @@ export const onCreatePurchase = /* GraphQL */ `
   subscription OnCreatePurchase($owner: String) {
     onCreatePurchase(owner: $owner) {
       id
-      owner
-      createdAt
-      updatedAt
-      products {
-        items {
-          id
-          owner
-          amount
-          purchase_id
-          product_id
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
     }
   }
 `;

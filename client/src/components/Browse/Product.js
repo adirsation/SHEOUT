@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Product(props) {
     const classes = useStyles();
 
-    const [count, setCount] = React.useState(0);
+    const { count } = props;
 
     const { product, handleAddToBasket, handleRemoveFromBasket } = props;
     const displayCounter = count > 0;
@@ -38,7 +38,6 @@ export default function Product(props) {
                         <Button
                             aria-label="reduce"
                             onClick={() => {
-                                setCount(Math.max(count - 1, 0));
                                 handleRemoveFromBasket(product.id)
                             }}
                         >
@@ -48,7 +47,6 @@ export default function Product(props) {
                         <Button
                             aria-label="increase"
                             onClick={() => {
-                                setCount(count + 1);
                                 handleAddToBasket(product.id)
                             }}
                         >

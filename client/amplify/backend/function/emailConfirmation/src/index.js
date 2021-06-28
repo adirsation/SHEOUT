@@ -1,10 +1,4 @@
 /* Amplify Params - DO NOT EDIT
-	ANALYTICS_SHEOUT_ID
-	ANALYTICS_SHEOUT_REGION
-	AUTH_SHEOUT9B7CA99C9B7CA99C_USERPOOLID
-	ENV
-	REGION
-Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
   ANALYTICS_SHEOUT_ID
   ANALYTICS_SHEOUT_REGION
   AUTH_SHEOUT9B7CA99C9B7CA99C_USERPOOLID
@@ -29,6 +23,7 @@ var pinpoint = new AWS.Pinpoint({
 
 var cognito = new AWS.CognitoIdentityServiceProvider({ apiVersion: '2016-04-18' });
 
+
 exports.handler = async event => {
   //eslint-disable-line
   console.log(JSON.stringify(event, null, 2));
@@ -36,59 +31,74 @@ exports.handler = async event => {
     console.log(record);
     console.log('DynamoDB Record: %j', record.dynamodb);
   });
-  console.log(`User triggered id: ${event.Records[0].dynamodb.NewImage.owner.S}`)
+
+  console.log('Before cognito request')
+  await handleConfirmationMail(event.Records[0].dynamodb.NewImage.owner.S)
+};
+
+const handleConfirmationMail = async (userId) => {
   var cognitoParams = {
-    UserPoolId: event.Records[0].dynamodb.NewImage.owner.S,
+    UserPoolId: process.env.AUTH_SHEOUT9B7CA99C9B7CA99C_USERPOOLID,
     AttributesToGet: [
       'email',
     ],
+    Filter: "username=\"" + userId + "\""
   };
-  await cognito.listUsers(cognitoParams).promise().then(async function (data, error) {
-    if (!data) {
-      console.log('error fetching users data');
-    }
-    else {
-      var addressTo = data.Users[0].Attributes['email'];
-      var params = {
-        ApplicationId: appId,
-        MessageRequest: {
-          Addresses: {
-            [addressTo]: {
-              ChannelType: 'EMAIL'
-            }
-          },
-          MessageConfiguration: {
-            EmailMessage: {
-              FromAddress: senderAddress,
-              SimpleEmail: {
-                Subject: {
-                  Charset: charset,
-                  Data: subject
-                },
-                HtmlPart: {
-                  Charset: charset,
-                  Data: body_html
-                },
-                TextPart: {
-                  Charset: charset,
-                  Data: body_text
-                }
+
+  const response = await new Promise((resolve, reject) => {
+    cognito.listUsers(cognitoParams, (err, data) => {
+      if (err) {
+        reject(err)
+        return err
+      } else {
+        resolve(data)
+      }
+    })
+  })
+  if (response.error) {
+    console.log('An error occured while trying to get user data from cognito: ', response.error);
+  } else {
+    console.log(`Users mail: ${response.Users[0].Attributes[0].Value}`);
+    var addressTo = response.Users[0].Attributes[0].Value;
+    var params = {
+      ApplicationId: appId,
+      MessageRequest: {
+        Addresses: {
+          [addressTo]: {
+            ChannelType: 'EMAIL'
+          }
+        },
+        MessageConfiguration: {
+          EmailMessage: {
+            FromAddress: senderAddress,
+            SimpleEmail: {
+              Subject: {
+                Charset: charset,
+                Data: subject
+              },
+              HtmlPart: {
+                Charset: charset,
+                Data: body_html
+              },
+              TextPart: {
+                Charset: charset,
+                Data: body_text
               }
             }
           }
         }
       }
-
-      await pinpoint.sendMessages(params).promise().then((resp, error) => {
-        if (error) {
-          console.error('An error occured while trying to send an email: ', error);
-        } else {
-          console.log("Email sent!");
-        };
-      });
-
     }
-  });
+  }
 
-  return Promise.resolve('Successfully processed DynamoDB record');
-};
+  await new Promise((resolve, reject) => {
+    pinpoint.sendMessages(params, (err, data) => {
+      if (err) {
+        console.error('An error occured while trying to send an email: ' + err);
+        reject(err);
+      } else {
+        resolve("Email sent!");
+      }
+    });
+  });
+}

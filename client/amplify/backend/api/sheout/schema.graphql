@@ -1,6 +1,6 @@
 type Purchase @model
               @auth(rules: [{ allow: owner },
-                            { allow: private, provider: iam, operations: [create, read] }]) {
+                            { allow: private, provider: iam }]) {
   id: ID!
   owner: String
   products: [PurchasedProduct] @connection(keyName: "PurchasedProductByPurchase", fields: ["id"])
@@ -8,7 +8,7 @@ type Purchase @model
 
 type PurchasedProduct @model(queries: null)
                       @auth(rules: [ { allow: owner },
-                                     { allow: private, provider: iam, operations: [create, read] }])
+                                     { allow: private, provider: iam }])
                       @key(name: "PurchasedProductByPurchase", fields: ["purchase_id"]) {
   id: ID!
   owner: String
@@ -23,4 +23,8 @@ type Product @model {
   name: String!
   img: String!
   price: Int!
+}
+
+type Subscription {
+  subscribeToPurchase(owner: String!): Purchase @aws_subscribe(mutations: ["createPurchase"])
 }

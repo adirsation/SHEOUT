@@ -1,5 +1,13 @@
 {
   "api": {
+    "auth": {
+      "sheout9b7ca99c9b7ca99c": {
+        "service": "Cognito",
+        "providerPlugin": "awscloudformation",
+        "dependsOn": [],
+        "customAuth": false
+      }
+    },
     "sheout": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
@@ -71,6 +79,21 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "function",
+          "resourceName": "sheoutcommon",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "api",
+          "resourceName": "sheout",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        },
+        {
           "category": "auth",
           "resourceName": "sheout9b7ca99c9b7ca99c",
           "attributes": [
@@ -84,13 +107,6 @@
             "Id",
             "Region"
           ]
-        },
-        {
-          "category": "function",
-          "resourceName": "sheoutcommon",
-          "attributes": [
-            "Arn"
-          ]
         }
       ]
     },
@@ -98,14 +114,6 @@
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
-    }
-  },
-  "auth": {
-    "sheout9b7ca99c9b7ca99c": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "customAuth": false
     }
   },
   "analytics": {

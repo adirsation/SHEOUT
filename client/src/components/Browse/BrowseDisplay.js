@@ -1,3 +1,4 @@
+import { API, graphqlOperation } from 'aws-amplify';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
@@ -14,6 +15,7 @@ import Product from './Product';
 import OrderSnackbar from './OrderSnackbar';
 import productsActions from '../../redux/actions/productsActions';
 import purchaseActions from '../../redux/actions/purchaseActions';
+import { onCreatePurchase } from '../../graphql/subscriptions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,11 +84,22 @@ export default function BrowseDisplay(props) {
       })
     }
     dispatch(purchaseActions.submitOrder({ products: order }));
+    setBasket([]);
   }
 
   useEffect(() => {
+    //dispatch(purchaseActions.subscribeToOrders())
+    const sub = API.graphql(graphqlOperation(onCreatePurchase, { owner: '385b45b0-8d6a-4b89-b2b1-37a47180b7f4' })).subscribe({
+      next: data => {
+        console.log(data.data.onCreatePurchase);
+      },
+      error: error => {
+        console.warn(error);
+      }
+    });
+
     dispatch(productsActions.fetchProducts());
-  }, [dispatch]);
+  }, []);
 
   const classes = useStyles();
 
@@ -102,7 +115,7 @@ export default function BrowseDisplay(props) {
             {products.map((currProduct) => (
               <GridListTile key={currProduct.id} cols={1}>
                 <img src={currProduct.img} alt={currProduct.name} />
-                <Product product={currProduct}
+                <Product product={currProduct} count={basket[currProduct.id] ? basket[currProduct.id] : 0}
                   handleAddToBasket={handleAddToBasket}
                   handleRemoveFromBasket={() => handleRemoveFromBasket(currProduct.id)}
                 />

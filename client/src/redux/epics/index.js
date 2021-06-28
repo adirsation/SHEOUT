@@ -1,11 +1,11 @@
 import { combineEpics } from 'redux-observable';
 
 import * as productsEpics from './productsEpics';
-import * as purchaseEpic from './purchaseEpic';
+import * as purchaseEpics from './purchaseEpics';
 
 export default combineEpics(
     ...Object.values({
         ...productsEpics,
-        ...purchaseEpic
+        ...purchaseEpics
       })
 )

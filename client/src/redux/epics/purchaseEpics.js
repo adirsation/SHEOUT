@@ -1,7 +1,7 @@
 import { from, of } from 'rxjs';
 import { ofType } from "redux-observable";
-import { mergeMap, switchMap, pluck, map, catchError } from 'rxjs/operators';
-import { API, graphqlOperation } from "aws-amplify";
+import { mergeMap, switchMap, pluck, catchError } from 'rxjs/operators';
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import { listPurchases } from '../../graphql/customQueries';
 import { onCreatePurchase } from '../../graphql/subscriptions';
 import Actions from '../actions/index';
@@ -22,10 +22,15 @@ export const fetchPurchasesEpic = action$ =>
 
 export const subscribeToOrderEpic = action$ =>
     action$.pipe(
+        ofType(Actions.SUBSCRIBE_TO_ORDERS),
         switchMap(() =>
-            from(API.graphql(graphqlOperation(onCreatePurchase))).pipe(
-                mergeMap(() => of(Actions.orderSubmitted())),
-                catchError(error => of(Actions.orderFailed(error)))
+            from(Auth.currentAuthenticatedUser()).pipe(
+                switchMap((user) =>
+                    from(API.graphql(graphqlOperation(onCreatePurchase, { owner: user.username }))).pipe(
+                        mergeMap(() => of(Actions.orderSubmitted())),
+                        catchError(error => of(Actions.orderFailed(error)))
+                    )
+                )
             )
         )
     )

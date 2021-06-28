@@ -1,4 +1,6 @@
 {
+    "identityPoolName": "sheout9b7ca99c9b7ca99c_identitypool_b142fcaf",
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "sheout9b7ca99c",
     "userPoolName": "sheout9b7ca99c_userpool_9b7ca99c",
     "autoVerifiedAttributes": [
@@ -27,10 +29,10 @@
         "email"
     ],
     "userpoolClientLambdaRole": "sheout9b7ca99c_userpoolclient_lambda_role",
-    "userpoolClientSetAttributes": false,
+    "userpoolClientSetAttributes": true,
     "sharedId": "9b7ca99c",
     "resourceName": "sheout9b7ca99c9b7ca99c",
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -60,5 +62,6 @@
     "breakCircularDependency": true,
     "permissions": [],
     "dependsOn": [],
-    "authProviders": []
+    "authProviders": [],
+    "thirdPartyAuth": false
 }

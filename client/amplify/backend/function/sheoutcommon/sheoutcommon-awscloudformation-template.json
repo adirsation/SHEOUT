@@ -20,7 +20,7 @@
     }
   },
   "Resources": {
-    "LambdaLayerVersion01c3decd": {
+    "LambdaLayerVersion91874375": {
       "Type": "AWS::Lambda::LayerVersion",
       "Properties": {
         "CompatibleRuntimes": {
@@ -51,13 +51,223 @@
       "DeletionPolicy": "Delete",
       "UpdateReplacePolicy": "Retain"
     },
-    "LambdaLayerPermissionPublic01c3decd": {
+    "LambdaLayerPermissionPublic91874375": {
       "Type": "AWS::Lambda::LayerVersionPermission",
       "Properties": {
         "Action": "lambda:GetLayerVersion",
         "LayerVersionArn": {
-          "Ref": "LambdaLayerVersion01c3decd"
+          "Ref": "LambdaLayerVersion91874375"
         },
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerVersiond9f9fbf2": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/sheoutcommon-LambdaLayerVersiond9f9fbf2-build.zip"
+        },
+        "Description": "Updated layer version 2021-06-27T14:18:26.053Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "sheoutcommon-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPublicd9f9fbf2": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:949815275750:layer:sheoutcommon-dev:8",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerVersion11751eba": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion11751eba-build.zip"
+        },
+        "Description": "Updated layer version 2021-06-27T12:37:19.371Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "sheoutcommon-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPublic11751eba": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:949815275750:layer:sheoutcommon-dev:7",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerVersion8438454a": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion8438454a-build.zip"
+        },
+        "Description": "Updated layer version 2021-06-27T12:16:20.184Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "sheoutcommon-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPublic8438454a": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:949815275750:layer:sheoutcommon-dev:6",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerVersion970e7e17": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion970e7e17-build.zip"
+        },
+        "Description": "Updated layer version 2021-06-27T11:40:47.349Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "sheoutcommon-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPublic970e7e17": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:949815275750:layer:sheoutcommon-dev:5",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerVersion32d1b5b2": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion32d1b5b2-build.zip"
+        },
+        "Description": "Updated layer version 2021-06-27T09:15:22.633Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "sheoutcommon-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPublic32d1b5b2": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:949815275750:layer:sheoutcommon-dev:4",
+        "Principal": "*"
+      }
+    },
+    "LambdaLayerVersion01c3decd": {
+      "Type": "AWS::Lambda::LayerVersion",
+      "Properties": {
+        "CompatibleRuntimes": [
+          "nodejs14.x"
+        ],
+        "Content": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": "amplify-builds/sheoutcommon-LambdaLayerVersion01c3decd-build.zip"
+        },
+        "Description": "Updated layer version 2021-06-24T13:56:20.196Z",
+        "LayerName": {
+          "Fn::Sub": [
+            "sheoutcommon-${env}",
+            {
+              "env": {
+                "Ref": "env"
+              }
+            }
+          ]
+        }
+      },
+      "DeletionPolicy": "Delete",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "LambdaLayerPermissionPublic01c3decd": {
+      "Type": "AWS::Lambda::LayerVersionPermission",
+      "Properties": {
+        "Action": "lambda:GetLayerVersion",
+        "LayerVersionArn": "arn:aws:lambda:us-east-1:949815275750:layer:sheoutcommon-dev:3",
         "Principal": "*"
       }
     },
@@ -135,7 +345,7 @@
   "Outputs": {
     "Arn": {
       "Value": {
-        "Ref": "LambdaLayerVersion01c3decd"
+        "Ref": "LambdaLayerVersion91874375"
       }
     }
   }

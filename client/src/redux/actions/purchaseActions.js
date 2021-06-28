@@ -5,6 +5,8 @@ const FETCH_PURCHASES = 'FETCH_PURCHASES'
 const FETCH_PURCHASES_SUCCESSFULL = 'FETCH_PURCHASES_SUCCESSFULL'
 const ORDER_FAILED = 'ORDER_FAILED'
 const ORDER_SUBMITTED = 'ORDER_SUBMITTED'
+const SUBSCRIBE_TO_ORDERS = 'SUBSCRIBE_TO_ORDERS'
+const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR'
 
 // Action Creators
 const submitOrder = payload => ({
@@ -26,14 +28,23 @@ const fetchPurchasesSuccessfull = payload => ({
     payload
 })
 
-const orderSubmitted = () => payload => ({
-    type: ORDER_SUBMITTED,
-    payload
+const subscribeToOrders = () => ({
+    type: SUBSCRIBE_TO_ORDERS,
 })
 
-const orderFailed = payload => ({
-    type: ORDER_FAILED,
-    payload
+const orderSubmitted = () => ({
+    type: ORDER_SUBMITTED,
+})
+
+const orderFailed = payload => {
+    console.log(payload.error);
+    return ({
+        type: ORDER_FAILED,
+    })
+}
+
+const closeSnackbar = () => ({
+    type: CLOSE_SNACKBAR,
 })
 
 export default {
@@ -43,7 +54,11 @@ export default {
     FETCH_PURCHASES_SUCCESSFULL,
     ORDER_SUBMITTED,
     ORDER_FAILED,
+    CLOSE_SNACKBAR,
+    SUBSCRIBE_TO_ORDERS,
+    closeSnackbar,
     orderSubmitted,
+    subscribeToOrders,
     orderFailed,
     submitOrder,
     submitOrderSuccessfull,

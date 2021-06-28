@@ -1,104 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const updatePurchase = /* GraphQL */ `
-  mutation UpdatePurchase(
-    $input: UpdatePurchaseInput!
-    $condition: ModelPurchaseConditionInput
-  ) {
-    updatePurchase(input: $input, condition: $condition) {
-      id
-      owner
-      createdAt
-      updatedAt
-      products {
-        items {
-          id
-          owner
-          amount
-          purchase_id
-          product_id
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const deletePurchase = /* GraphQL */ `
-  mutation DeletePurchase(
-    $input: DeletePurchaseInput!
-    $condition: ModelPurchaseConditionInput
-  ) {
-    deletePurchase(input: $input, condition: $condition) {
-      id
-      owner
-      createdAt
-      updatedAt
-      products {
-        items {
-          id
-          owner
-          amount
-          purchase_id
-          product_id
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const updatePurchasedProduct = /* GraphQL */ `
-  mutation UpdatePurchasedProduct(
-    $input: UpdatePurchasedProductInput!
-    $condition: ModelPurchasedProductConditionInput
-  ) {
-    updatePurchasedProduct(input: $input, condition: $condition) {
-      id
-      owner
-      amount
-      purchase_id
-      product_id
-      product {
-        id
-        name
-        img
-        price
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deletePurchasedProduct = /* GraphQL */ `
-  mutation DeletePurchasedProduct(
-    $input: DeletePurchasedProductInput!
-    $condition: ModelPurchasedProductConditionInput
-  ) {
-    deletePurchasedProduct(input: $input, condition: $condition) {
-      id
-      owner
-      amount
-      purchase_id
-      product_id
-      product {
-        id
-        name
-        img
-        price
-        createdAt
-        updatedAt
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const createProduct = /* GraphQL */ `
   mutation CreateProduct(
     $input: CreateProductInput!
@@ -169,12 +71,110 @@ export const createPurchase = /* GraphQL */ `
     }
   }
 `;
+export const updatePurchase = /* GraphQL */ `
+  mutation UpdatePurchase(
+    $input: UpdatePurchaseInput!
+    $condition: ModelPurchaseConditionInput
+  ) {
+    updatePurchase(input: $input, condition: $condition) {
+      id
+      owner
+      createdAt
+      updatedAt
+      products {
+        items {
+          id
+          owner
+          amount
+          purchase_id
+          product_id
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const deletePurchase = /* GraphQL */ `
+  mutation DeletePurchase(
+    $input: DeletePurchaseInput!
+    $condition: ModelPurchaseConditionInput
+  ) {
+    deletePurchase(input: $input, condition: $condition) {
+      id
+      owner
+      createdAt
+      updatedAt
+      products {
+        items {
+          id
+          owner
+          amount
+          purchase_id
+          product_id
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createPurchasedProduct = /* GraphQL */ `
   mutation CreatePurchasedProduct(
     $input: CreatePurchasedProductInput!
     $condition: ModelPurchasedProductConditionInput
   ) {
     createPurchasedProduct(input: $input, condition: $condition) {
+      id
+      owner
+      amount
+      purchase_id
+      product_id
+      product {
+        id
+        name
+        img
+        price
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePurchasedProduct = /* GraphQL */ `
+  mutation UpdatePurchasedProduct(
+    $input: UpdatePurchasedProductInput!
+    $condition: ModelPurchasedProductConditionInput
+  ) {
+    updatePurchasedProduct(input: $input, condition: $condition) {
+      id
+      owner
+      amount
+      purchase_id
+      product_id
+      product {
+        id
+        name
+        img
+        price
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePurchasedProduct = /* GraphQL */ `
+  mutation DeletePurchasedProduct(
+    $input: DeletePurchasedProductInput!
+    $condition: ModelPurchasedProductConditionInput
+  ) {
+    deletePurchasedProduct(input: $input, condition: $condition) {
       id
       owner
       amount

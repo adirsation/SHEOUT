@@ -1,11 +1,15 @@
 import Actions from "../actions/index";
 
-export default (state = [], action) => {
+const initialState = {
+    showSnackbar: {
+        isOpen: false,
+        msg: '',
+        severity: ''
+    }
+}
+
+export default (state = initialState, action) => {
     switch (action.type) {
-        case Actions.SUBMIT_ORDER_SUCCESSFULL:
-            return {
-                state
-            }
         case Actions.FETCH_PURCHASES_SUCCESSFULL:
             return {
                 ...state,
@@ -18,6 +22,15 @@ export default (state = [], action) => {
                     isOpen: true,
                     msg: "Ordered Successfully!",
                     severity: "success"
+                }
+            }
+        case Actions.CLOSE_SNACKBAR:
+            return {
+                ...state,
+                showSnackbar: {
+                    isOpen: false,
+                    msg: "",
+                    severity: ""
                 }
             }
         case Actions.ORDER_FAILED:
